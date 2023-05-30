@@ -1,0 +1,27 @@
+#c{
+    z-index: 0;
+    display: none;
+}
+#b{
+    z-index:1;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+
+#b:hover{
+    box-shadow: none;
+}
+
+#b:hover + #c{
+    display: block;
+}
+
+#b:active + #c, #b:active {
+    transform: scale(0.9)
+}
+
+@media (max-width: 768px){
+    #b:active + #c{
+        display:block;
+        transform: scale(0.9)
+    }
+}

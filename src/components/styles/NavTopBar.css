@@ -1,0 +1,9 @@
+#search-suggestion{
+    display: none;
+}
+
+#search-suggestion:hover,
+#search-input:active + #search-suggestion, 
+#search-input:focus + #search-suggestion{
+    display: block;
+}

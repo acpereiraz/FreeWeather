@@ -1,0 +1,19 @@
+#container-logo-inner:hover #logo-label, #container-logo-inner:hover #logo-icon {
+    text-shadow: 1px 4px 10px rgba(168, 85, 247, 0.2)
+}
+
+#container-nav a {
+    margin-left: 1.5rem;
+    justify-content: start;
+    padding: 0px;
+}
+
+.short #container-nav a{
+    margin-left: 0px;
+    justify-content: center;
+    padding: 4px 1.5rem;
+}
+
+.short .shouldHidden{
+    display: none;
+} 

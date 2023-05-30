@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.apexcharts-tooltip.apexcharts-theme-light.apexcharts-active {
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(255 255 255 / 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    -moz-backdrop-filter: blur(8px);
+    -o-backdrop-filter: blur(8px);
+    -ms-backdrop-filter: blur(8px);
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    font-weight: 400;
+    flex-direction: column;
+    padding: 8px 15px;
+    color: #48545e;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.22);
+    border-radius: 10px;
+    border: none;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+
+.dark .apexcharts-tooltip.apexcharts-theme-light.apexcharts-active {
+    background-color: rgb(20 22 23 / 0.5);
+    color: rgb(209 213 219);
+    text-shadow: 2px 1px 5px rgba(209, 213, 219,0.22);
+    
+}
+
+.apexcharts-xaxistooltip.apexcharts-xaxistooltip-bottom.apexcharts-theme-light {
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(255 255 255 / 1);
+    backdrop-filter: blur(8px);
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    font-weight: 500;
+    flex-direction: column;
+    padding: 8px 15px;
+    color: rgb(107, 114, 128);
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.22);
+    border-radius: 10px;
+    border: solid 1px rgba(119, 128, 135, 0.4);
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+.dark .apexcharts-xaxistooltip.apexcharts-xaxistooltip-bottom.apexcharts-theme-light {
+    background-color: rgb(20 22 23 / 0.8);
+    color: rgb(209 213 219);
+    text-shadow: 2px 2px 5px rgba(209, 213, 219,0.22);
+    border: solid 1px rgba(20, 22, 23, 0.4);
+}
+
+#weather-temps {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+}
+
+#weather-temps-container{
+    display: flex;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+}
+
+#areachartdiv > div{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    transition: all;
+    transition-duration: 300ms;
+}

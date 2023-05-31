@@ -4,7 +4,7 @@ O FreeWeather foi criado para suprir a necessidade de ter na palma da mão todas
 ### Como foi feito?
 Foi projetado utilizando a linguagem Javascript com a biblioteca React. Para a estilização foi utilizado o framework de CSS TailwindCSS, exceto algumas estilizações mais específicas que para serem alcançadas foi utilizado o CSS3. Todo o layout segue o padrão de responsividade do TailwindCSS, o tornando inteiramente responsivo, desde a tela do smartphone, tablet, até a tela do monitor.
 
-### Quais módulos foram usados para compor o projeto?
+### Quais bibliotecas foram usadas para compor o projeto?
 
 - ApexCharts:
 O ApexCharts é uma biblioteca de gráficos interativos em JavaScript que permite criar visualizações de dados dinâmicas e atrativas em páginas da web. Essa biblioteca compõe o gráfico de temperaturas mínimas e máximas onde leva o título de "Average Temperature".

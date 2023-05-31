@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import CardList from "./components/CardList";
-import ApiCaller from "./utils/ApiCaller";
-import GetDays from "./utils/GetDays";
-import NavTopBar from "./components/NavTopBar";
-import PanelLeft from "./components/PanelLeft";
+import CardList from "./components/CardList.jsx";
+import ApiCaller from "./utils/ApiCaller.js";
+import GetDays from "./utils/GetDays.js";
+import NavTopBar from "./components/NavTopBar.jsx";
+import PanelLeft from "./components/PanelLeft.jsx";
 import { isMobile } from "react-device-detect";
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await ApiCaller(`http://api.openweathermap.org/data/2.5/forecast?lat=${currentCoord[0]}&lon=${currentCoord[1]}&lang=en_us&appid=b2f1f764226d2c56c81042951ce99ea7&units=metric`);
+      const response = await ApiCaller(`https://api.openweathermap.org/data/2.5/forecast?lat=${currentCoord[0]}&lon=${currentCoord[1]}&lang=en_us&appid=b2f1f764226d2c56c81042951ce99ea7&units=metric`);
       const days = await GetDays(response.list);
       setCity(response.city)
       setData(days);
@@ -71,7 +71,7 @@ function App() {
             setIsDark={setIsDark}
             setCurrentCoord={setCurrentCoord}
           />
-          <CardList city={city} fullData={data} isMobile={isMobile} isDark={isDark} />
+          <CardList city={city} fullData={data} isDark={isDark} />
         </div>
       </div>
     </div>

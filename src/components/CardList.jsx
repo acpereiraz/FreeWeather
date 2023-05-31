@@ -1,24 +1,16 @@
 import { useState } from "react";
-import Label from "./Label";
-import Icon from "./Icon";
-import AreaChart from "./AreaChart";
-import FormatDate from "../utils/FormatDate";
-import {FormatHour as TimeNow} from "../utils/FormatHour";
-import WeatherTable from "./WeatherTable";
+import Label from "./Label.jsx";
+import Icon from "./Icon.jsx";
+import AreaChart from "./AreaChart.jsx";
+import FormatDate from "../utils/FormatDate.js";
+import {FormatHour as TimeNow} from "../utils/FormatHour.js";
+import WeatherTable from "./WeatherTable.jsx";
 import "./styles/CardList.css";
-import { HiOutlineSortDescending } from "react-icons/hi";
 
-function CardList({ city, fullData, isMobile, isDark}) {
+function CardList({ city, fullData, isDark}) {
   const [showCalendar, setShowCalendar] = useState(false);
   const [dayIndex, setDayIndex] = useState(0);
-  const data = fullData[dayIndex];
-
-  const gradient = {
-    sunny: "bg-gradient-to-tl from-[#60a5fa] to-[#FBDA61]",
-    sunset: "bg-gradient-to-tl from-[#FF5ACD] to-[#FBDA61]",
-    cloudy: "bg-gradient-to-tl from-[#80D0C7] to-[#0093E9]",
-    purple: "bg-gradient-to-bl from-indigo-600 via-purple-600 to-pink-500",
-  };
+  const data = fullData[dayIndex]
 
   const handleClick = () => {
     !showCalendar ? setShowCalendar(true) : setShowCalendar(false);

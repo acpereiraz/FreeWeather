@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./styles/NavTopBar.css"
-import ApiCaller from "../utils/ApiCaller";
+import ApiCaller from "../utils/ApiCaller.js";
 
 const NavTopBar = ({ isPanelActive, setIsPanelActive, isDark, setIsDark, setCurrentCoord }) => {
 
@@ -19,7 +19,7 @@ const NavTopBar = ({ isPanelActive, setIsPanelActive, isDark, setIsDark, setCurr
 
   useEffect(()=>{
     setIsLoading(true)
-    ApiCaller(`http://api.openweathermap.org/geo/1.0/direct?q=${searchArg}&limit=5&appid=ef1a7385a0d8ab7a40365905e852e964`)
+    ApiCaller(`https://api.openweathermap.org/geo/1.0/direct?q=${searchArg}&limit=5&appid=ef1a7385a0d8ab7a40365905e852e964`)
     .then((response) => {
       setCityArr(response);
     })

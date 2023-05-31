@@ -1,10 +1,7 @@
-import { useEffect, useState} from "react";
-import styled from "styled-components";
 import "./styles/PanelLeft.css";
-import { TbH3 } from "react-icons/tb";
 
 
-const PanelLeft = ({ isPanelActive, darkMode }) => {
+const PanelLeft = ({ isPanelActive }) => {
 
   const menuItems = [
     {

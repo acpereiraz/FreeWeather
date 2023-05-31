@@ -1,12 +1,11 @@
-
 import { TbTilde } from "react-icons/tb"
 import { HiArrowSmRight } from "react-icons/hi";
-import FormatDate from "../utils/FormatDate";
+import FormatDate from "../utils/FormatDate.js";
 import { IoIosThermometer, IoIosWater } from "react-icons/io";
 import { VscArrowSmallDown, VscArrowSmallUp } from "react-icons/vsc";
 import { WiCelsius, WiStrongWind, WiDaySunny, WiNightClear, WiDayCloudy, WiNightCloudy, WiCloudy, WiSprinkle, WiRain, WiDayRain, WiNightRain, WiDayLightning, WiNightLightning, WiDaySnow, WiNightSnow, WiDayFog, WiNightFog } from "react-icons/wi";
 
-const WeatherTable = ({data, dayIndex}) => {
+const WeatherTable = ({ data }) => {
 
   const weatherIcons = {
     "01d": <WiDaySunny />,
@@ -35,6 +34,7 @@ const WeatherTable = ({data, dayIndex}) => {
       weatherData.push(
         {
           icon: weatherIcons[subitem.weather[0].icon],
+          condition: subitem.weather[0].description,
           date: subitem.dt_txt.split(" ")[0],
           hour: subitem.dt_txt.split(" ")[1].replace(":00", ""),
           feelsLikeTemperature: parseInt(subitem.main.feels_like),
@@ -75,7 +75,7 @@ const WeatherTable = ({data, dayIndex}) => {
       <tbody>
         {weatherData.map((item, index) => (
           <tr key={index} className="whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-midnight">
-            <td className="border-b dark:border-ltblack p-2 lg:p-4 text-[24px]">{item.icon}</td>
+            <td className="border-b dark:border-ltblack p-2 lg:p-4 text-[24px]" title={`${item.condition}`} >{item.icon}</td>
             <td className="border-b dark:border-ltblack p-1 lg:pl-1 lg:pr-2 text-[12px] md:text-[14px] lg:text-[16px]"><div className="flex">{FormatDate(item.date)[0]}</div></td>
             <td className="border-b dark:border-ltblack p-2 lg:p-4 text-[12px] md:text-[14px] lg:text-[16px]"><div className="flex">{item.hour}</div></td>
             <td className="border-b dark:border-ltblack p-0 translate-x-[10px] lg:translate-x-3 lg:p-4 xl:translate-x-0 bg-[#b000ff10]">

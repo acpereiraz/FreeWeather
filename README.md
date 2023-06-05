@@ -1,10 +1,10 @@
 # FreeWeather
 O FreeWeather foi criado para suprir a necessidade de ter na palma da mão todas as informações de clima e previsões de qualquer local, matendo o usuário atualizado a todo momento das previsões da sua cidade e do mundo. O mesmo pede a localização atual do usuário para se ajustar e mostrar as previsões de acordo o local disponibilizado pelo GPS do dispositivo.
 
-### Como foi feito?
+## Como foi feito?
 Foi projetado utilizando a linguagem Javascript com a biblioteca React. Para a estilização foi utilizado o framework de CSS TailwindCSS, exceto algumas estilizações mais específicas que para serem alcançadas foi utilizado o CSS3. Todo o layout segue o padrão de responsividade do TailwindCSS, o tornando inteiramente responsivo, desde a tela do smartphone, tablet, até a tela do monitor.
 
-### Quais bibliotecas foram usadas para compor o projeto?
+## Quais bibliotecas foram usadas para compor o projeto?
 
 - ApexCharts:
 O ApexCharts é uma biblioteca de gráficos interativos em JavaScript que permite criar visualizações de dados dinâmicas e atrativas em páginas da web. Essa biblioteca compõe o gráfico de temperaturas mínimas e máximas onde leva o título de "Average Temperature".
@@ -15,7 +15,7 @@ O React Icons é uma biblioteca popular que fornece um conjunto abrangente de í
 - Axios:
 O Axios é uma biblioteca JavaScript usada para fazer requisições HTTP em aplicativos web. A sua utilização fez com que fosse possível fazer requisições GET à API do OpenWeatherMap.org.
 
-### Qual o seu fluxo de funcionamento?
+## Qual o seu fluxo de funcionamento?
 Ao primeiro acesso o usuário será questionado pelo próprio navegador se deseja compartilhar a sua localização, assim poderemos fornecer informações com base em sua localização atual dada pelo GPS.
 
 Em seguida é executada a requisição GET na API do OpenWeatherMap para obter os dados de clima e previsões mais recentes (nesse momento o usuário verá uma tela de carregamento para aguardar a requisição se completar). 
@@ -37,7 +37,7 @@ Na parte inferior da página contém um botão (Next), sua função é a de exib
 
 Tudo isso compõe o FreeWeather o tornando uma opção simples, objetiva, e de fácil leitura para acompanhar as condições climáticas mais recentes e futuras.
 
-### Atualizações futuras (WIP):
+## Atualizações futuras (WIP):
 - [ ] Documentar todo o código
 - [ ] Implementar funcionalidades do menu lateral
 - [ ] Página de boas vindas

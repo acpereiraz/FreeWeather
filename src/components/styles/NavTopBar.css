@@ -7,3 +7,7 @@
 #search-input:focus + #search-suggestion{
     display: block;
 }
+
+#nav-top{
+    z-index: 99999;
+}

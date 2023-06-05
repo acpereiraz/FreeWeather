@@ -12,6 +12,7 @@ body, body .dark {
   transition: all;
   transition-duration: 300ms;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body{

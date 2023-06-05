@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./styles/NavTopBar.css"
 import ApiCaller from "../utils/ApiCaller.js";
 
-const NavTopBar = ({ isPanelActive, setIsPanelActive, isDark, setIsDark, setCurrentCoord }) => {
+const NavTopBar = ({ isPanelActive, setIsPanelActive, isDark, setIsDark, setCurrentCoord, scrollOffset }) => {
 
   const [cityArr, setCityArr] = useState([]);
   const [searchArg, setSearchArg] = useState("Sao Paulo")
@@ -35,32 +35,14 @@ const NavTopBar = ({ isPanelActive, setIsPanelActive, isDark, setIsDark, setCurr
     (inputRef.current.value.length>3) && setSearchArg(inputRef.current.value);
   }
 
-  return (
-    <div className="mt-4 w-full px-4 sm:px-6">
-      
-      <div className={`${isPanelActive ? 'hidden ' : ''}bg-white opacity-80 hover:opacity-100 z-99 drop-shadow-md dark:bg-minblack transition-all duration-300 absolute top-[62px] p-1 left-8 min-h-fit rounded-3xl flex gap-2 text-purple-500`}>
-        <button className="p-2 rounded-full h-fit hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-maxblack dark:active:bg-midnight md:hidden flex items-center text-center transition-all duration-300">
-          <span className={`material-symbols-outlined text-md font-light`}>
-            home
-          </span>
-        </button>
+  useEffect(()=>{
+    setIsPanelActive(true);
+  },[scrollOffset])
 
-        <button className="p-2 rounded-full h-fit hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-maxblack dark:active:bg-midnight md:hidden flex items-center text-center transition-all duration-300">
-          <span className={`material-symbols-outlined text-md font-light`}>
-            star
-          </span>
-        </button>
-        <button className="p-2 rounded-full h-fit hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-maxblack dark:active:bg-midnight md:hidden flex items-center text-center transition-all duration-300">
-          <span className={`material-symbols-outlined text-md font-light`}>
-            person
-          </span>
-        </button>
-        <button className="p-2 rounded-full h-fit hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-maxblack dark:active:bg-midnight md:hidden flex items-center text-center transition-all duration-300">
-          <span className={`material-symbols-outlined text-md font-light`}>
-            info
-          </span>
-        </button>
-      </div>
+  const icons = ['home', 'star', 'person', 'info'];
+
+  return (
+    <div id="nav-top" className={`${scrollOffset&&"absolute shadow"} p-3 sm:py-4 sm:px-6 w-full bg-gray-100 dark:bg-minblack transition-all duration-300`}>
       
       <div id="container" className="flex justify-between items-center gap-2 sm:gap-4">
         
@@ -71,18 +53,30 @@ const NavTopBar = ({ isPanelActive, setIsPanelActive, isDark, setIsDark, setCurr
                                   via-purple-500 to-pink-400 bg-clip-text items-center justify-center md:hidden">
               <span id="logo-icon" className={`material-symbols-rounded text-[40px] subpixel-antialiased `}>cloud</span>
             </div>
-          
-          <button
-            id="panel-button"
-            onClick={handleClick}
-            className=" material-symbols-outlined text-1xl rounded-[100%] border-0 px-2 py-2 text-purple-500 hover:text-white 
-                        active:bg-purple-600 active:text-white active:transition-all subpixel-antialiased hover:transition-all
-                        transition-all active:duration-300 duration-300 scale-[110%] hover:bg-purple-500 
-              
-                        md:p-[6px] md:border-2 md:border-purple-500 md:active:border-purple-600"
-          >
-            menu
-          </button>
+
+            <div className="relative h-max">
+              <button
+                id="panel-button"
+                onClick={handleClick}
+                className=" material-symbols-outlined text-1xl rounded-[100%] border-0 px-2 py-2 text-purple-500 hover:text-white 
+                            active:bg-purple-600 active:text-white active:transition-all subpixel-antialiased hover:transition-all
+                            transition-all active:duration-300 duration-300 scale-[110%] hover:bg-purple-500 
+                  
+                            md:p-[6px] md:border-2 md:border-purple-500 md:active:border-purple-600"
+              >
+                menu
+              </button>
+              <div className={`${isPanelActive ? 'hidden' : ''} bg-white z-99 drop-shadow-md dark:bg-minblack transition-all duration-300 absolute min-h-fit rounded-3xl flex flex-col text-purple-500`}>
+                {icons.map((icon)=>(
+                  <button className="p-2 rounded-full h-fit hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-maxblack dark:active:bg-midnight md:hidden flex items-center text-center transition-all duration-300">
+                    <span className={`material-symbols-outlined text-md font-light`}>
+                      {icon}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
         </div>
 
         <div className="inline-block relative">
@@ -102,17 +96,16 @@ const NavTopBar = ({ isPanelActive, setIsPanelActive, isDark, setIsDark, setCurr
 
             <div id="search-suggestion" className="absolute z-10 w-full ">
               <ul
-                className=" bg-white dark:bg-maxblack dark:text-gray-300 text-gray-700 overflow-hidden shadow w-full rounded-xl 
-                                                mt-2 opacity-70 dark:opacity-80 dark:hover:opacity-100 hover:opacity-100 transition-all hover:transition-all 
-                                                    text-start transition-all dark:transition-all duration-300 dark:duration-300"
+                className=" bg-white dark:bg-maxblack dark:text-gray-300 text-gray-700 overflow-hidden shadow w-full rounded-xl duration-300
+                              mt-2 md:opacity-70 md:dark:opacity-80 md:dark:hover:opacity-100 md:hover:opacity-100 text-start transition-all"
               >
                 {isLoading? <div className="h-[188px] w-full flex justify-center items-center">Searching...</div> :
                 (cityArr?.map((city, index)=> (
                   <li
                     key={index}
                     onClick={()=> {setCurrentCoord([city.lat, city.lon])}}
-                    className=" px-4 py-2 text-gray-600 dark:text-gray-300 text-sm subpixel-antialiased hover:bg-purple-300 
-                                                      hover:text-white dark:hover:bg-purple-600 cursor-pointer"
+                    className=" px-4 py-2 text-gray-600 dark:text-gray-300 text-sm subpixel-antialiased hover:bg-purple-300 duration-200
+                                  hover:text-white dark:hover:bg-purple-600 cursor-pointer dark:active:bg-purple-800 transition-all"
                   >
                     {city.name}, <span className="overflow-hidden whitespace-nowrap">{city.state}</span>
                   </li>

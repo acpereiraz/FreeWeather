@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import CardList from "./components/CardList.jsx";
 import ApiCaller from "./utils/ApiCaller.js";
 import GetDays from "./utils/GetDays.js";
@@ -11,6 +11,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [city, setCity] = useState();
   const [currentCoord, setCurrentCoord] = useState(["-23.54", "-46.63"]) //São Paulo as default latitude and longitude
+  const [scrollOffset, setScrollOffset] = useState(0);
+  const scrollRef = useRef(null);
 
   useEffect(() => {
     (navigator.geolocation) && (
@@ -36,6 +38,10 @@ function App() {
     fetchData();
   }, [isLoading, currentCoord]);
 
+  const handleScroll = () => {
+    scrollRef.current && setScrollOffset(scrollRef.current.scrollTop)
+  }
+
   const [isPanelActive, setIsPanelActive] = useState(true);
   const [isDark, setIsDark] = useState(true);
 
@@ -56,7 +62,7 @@ function App() {
   return (
     // Main div
     <div className={`App${isDark ? ' dark' : ''}`}>
-      <div className="bg-[#f3f4f6] dark:bg-[#1f2022] flex flex-row overflow-x-clip subpixel-antialiased h-[100vh] w-[100vw] min-h-[100vh] max-h-[100vh] transition-all duration-300">
+      <div ref={scrollRef} onScroll={handleScroll} className="bg-[#f3f4f6] dark:bg-[#1f2022] flex flex-row overflow-x-clip overflow-y-auto lg:overflow-y-clip subpixel-antialiased h-[100vh] w-[100vw] min-h-[100vh] max-h-[100vh] transition-all duration-300">
         {/* Start */}
         <div id="container-start">
           <PanelLeft isPanelActive={isPanelActive} />
@@ -70,6 +76,7 @@ function App() {
             isDark={isDark}
             setIsDark={setIsDark}
             setCurrentCoord={setCurrentCoord}
+            scrollOffset={scrollOffset}
           />
           <CardList city={city} fullData={data} isDark={isDark} />
         </div>

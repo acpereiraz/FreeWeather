@@ -122,7 +122,7 @@ const AreaChart = ({isDark, data}) => {
   
   
   return (
-    <div id="areachartdiv" className="w-full">
+    <div id="areachartdiv" className="w-full z-[-1]">
     <ReactApexChart
       options={chartOptions}
       series={chartOptions.series}

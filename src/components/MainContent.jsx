@@ -1,12 +1,12 @@
 /**
- * Renders a card list component with weather information.
+ * This is the main component where it renders all the weather information.
  * @component
  *
  * @param {Object} city - The city object containing name.
  * @param {Array} fullData - The array of weather data for multiple days.
  * @param {boolean} isDark - Flag indicating if the dark theme is enabled.
  *
- * @returns {JSX.Element} The CardList component.
+ * @returns {JSX.Element} The MainContent component.
  */
 
 import { useState } from "react";
@@ -16,9 +16,9 @@ import AreaChart from "./AreaChart.jsx";
 import FormatDate from "../utils/FormatDate.js";
 import {FormatHour as TimeNow} from "../utils/FormatHour.js";
 import WeatherTable from "./WeatherTable.jsx";
-import "./styles/CardList.css";
+import "./styles/MainContent.css";
 
-function CardList({ city, fullData, isDark }) {
+function MainContent({ city, fullData, isDark }) {
   // State variables
   const [showCalendar, setShowCalendar] = useState(false);
   const [dayIndex, setDayIndex] = useState(0);
@@ -63,13 +63,7 @@ function CardList({ city, fullData, isDark }) {
   const arrDays = ['Today', 'Tomorrow', forecast.date[1]];
 
   return (
-    <div className="max-h-full h-full grow subpixel-antialiased sm:m-2 md:my-5 md:m-0 lg:my-6 lg:mr-4 xl:my-6 xl:mr-4">
-      {/* Card container */}
-      <div
-        id="container"
-        className="flex flex-col grow h-full max-h-[100vh] overflow-x-clip
-                                      sm:mt-4 sm:mb-6 sm:gap-4 md:mt-[0px] lg:flex lg:flex-row"
-      >
+      <div id="container" className="flex flex-col grow h-full overflow-x-clip subpixel-antialiased sm:m-3 lg:m-5 sm:gap-4 lg:gap-6 lg:flex lg:flex-row ">
         {/* Left container */}
         <div
           id="container-one"
@@ -79,7 +73,7 @@ function CardList({ city, fullData, isDark }) {
           {/* Weather details container */}
           <div
             id="container-label"
-            className="flex flex-row flex-wrap content-center justify-between w-full mt-1 px-2 text-gray-700 sm:px-4"
+            className="flex flex-row flex-wrap content-center justify-between w-full px-2 text-gray-700 sm:px-4"
           >
             <div className="flex flex-col text-start w-fit grow">
               <h2 className={`font-bold text-gray-600 dark:text-gray-300`}>
@@ -113,7 +107,7 @@ function CardList({ city, fullData, isDark }) {
           {/* Weather chart container*/}
           <div
             id="container-daybox"
-            className="flex flex-col text-start w-full gap-6 mt-2 sm:px-6"
+            className="flex flex-col text-start w-full gap-6 sm:px-6 grow justify-evenly"
           >
             <h3
               id="container-title"
@@ -139,7 +133,7 @@ function CardList({ city, fullData, isDark }) {
         <div
           id="container-two"
           className="p-[22px] flex bg-white shadow-lg dark:bg-maxblack transition-all duration-300 dark:transition-all dark:duration-300 grow p-4
-                                            sm:rounded-[40px] md:basis-[35%] md:transition-all lg:basis-2/5 xl:basis-[40%] xl:px-10 xl:pb-8 xl:pt-12 "
+                                            sm:rounded-[40px] md:basis-[35%] md:transition-all lg:basis-2/5 xl:basis-[40%] xl:px-10 xl:py-8"
         >
           {/* Weather forecasts table */}
           <div className="overflow-x-auto overflow-y-scroll h-[650px] sm:h-[550] md:h-[600] md:h-[720px] w-full items-center">
@@ -167,8 +161,7 @@ function CardList({ city, fullData, isDark }) {
           </span>
         </div>
       </div>
-    </div>
   );
 }
 
-export default CardList;
+export default MainContent;

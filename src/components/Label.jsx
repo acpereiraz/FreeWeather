@@ -9,12 +9,10 @@ function Label(props) {
   }
 
   return (
-    <div id="a" className="relative flex flex-col justify-center text-center items-center gap-2 subpixel-antialiased">
+    <div id="a" className="relative flex flex-col justify-center text-center items-center gap-2 subpixel-antialiased transition-all duration-300">
       <div id="b" className={`bg-gray-100 dark:bg-minblack hover:bg-gradient-to-bl hover:from-indigo-500 hover:via-purple-500 
-                        hover:to-pink-400 hover:transition-all active:bg-gradient-to-bl active:from-indigo-500 active:via-purple-500 
-                        active:to-pink-400 active:transition-all transition-all w-[65px] h-[65px] 
-                          rounded-xl grid content-center text-sm hover:text-white text-purple-400
-                            cursor-pointer`}>
+                                hover:to-pink-400 transition-all w-[65px] h-[65px] cursor-pointer duration-300
+                                    rounded-xl grid content-center text-sm hover:text-white text-purple-400`}>
         <span className={`material-symbols-outlined scale-[140%]`}>{props.icon}</span>
       </div>
       <div id="c" className="absolute w-[65px] h-[65px] blur-lg bg-gradient-to-bl from-indigo-500 

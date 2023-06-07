@@ -1,9 +1,12 @@
+// React imports
 import { useEffect, useRef, useState } from "react";
-import "./styles/NavTopBar.css"
-import ApiCaller from "../utils/ApiCaller.js";
-import Wait from "./Wait.jsx";
 import { LuPanelLeftOpen, LuPanelLeftClose } from "react-icons/lu";
 import Cookies from "js-cookie";
+// App local imports
+import ApiCaller from "../utils/ApiCaller.js";
+import Wait from "./Wait.jsx";
+// Styling imports
+import "./styles/NavTopBar.css"
 
 const NavTopBar = ({ isPanelActive, setIsPanelActive, isDark, setIsDark, setCurrentCoord, scrollOffset }) => {
 
@@ -18,7 +21,7 @@ const NavTopBar = ({ isPanelActive, setIsPanelActive, isDark, setIsDark, setCurr
   }
 
   function handleDarkModeSwitch() {
-    Cookies.set("dark-mode", !isDark);
+    Cookies.set("dark-mode", !isDark, { sameSite:'strict' });
     setIsDark(!isDark);
   }
 

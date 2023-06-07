@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import FadeInFromTop from "./transitions/FadeInFromTop";
 import moment from "moment";
 import "moment/locale/pt-br";
-import FadeInFromTop from "./transitions/FadeInFromTop";
+import React, { useState } from "react";
 
 function Capitalize(str){
   return str

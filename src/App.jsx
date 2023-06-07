@@ -1,12 +1,14 @@
+// React imports
 import { useEffect, useState, useRef } from "react";
-import MainContent from "./components/MainContent.jsx";
+import { isMobile } from "react-device-detect";
+import Cookies from "js-cookie";
+// App local imports
 import ApiCaller from "./utils/ApiCaller.js";
 import GetDays from "./utils/GetDays.js";
+import MainContent from "./components/MainContent.jsx";
 import NavTopBar from "./components/NavTopBar.jsx";
 import PanelLeft from "./components/PanelLeft.jsx";
-import { isMobile } from "react-device-detect";
 import Wait from "./components/Wait.jsx";
-import Cookies from "js-cookie";
 
 function App() {
 
@@ -44,17 +46,17 @@ function App() {
 
   useEffect(() => {
     async function fetchData(APIKEY) {
-      const response = await ApiCaller(`https://api.openweathermap.org/data/2.5/forecast?lat=${currentCoord[0]}&lon=${currentCoord[1]}&lang=en_us&appid=${APIKEY}&units=metric`);
-      const days = await GetDays(response.list);
-      setCity(response.city)
-      setData(days);
-      setIsLoading(false);
+      try{
+        const response = await ApiCaller(`https://api.openweathermap.org/data/2.5/forecast?lat=${currentCoord[0]}&lon=${currentCoord[1]}&lang=en_us&appid=${APIKEY}&units=metric`);
+        const days = await GetDays(response.list);
+        setCity(response.city)
+        setData(days);
+        setIsLoading(false);
+      }catch(error){
+        console.error("Error: ", error)
+      }
     }
-    try{
-      fetchData(APIKEY);
-    }catch(error){
-      console.error("Error: ", error)
-    }
+    fetchData(APIKEY);
   }, [isLoading, currentCoord, APIKEY]);
 
   const handleScroll = () => {

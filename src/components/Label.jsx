@@ -1,5 +1,7 @@
-import "./styles/Label.css";
+// React imports
 import PropTypes from 'prop-types';
+// Styling imports
+import "./styles/Label.css";
 
 function Label(props) {
 

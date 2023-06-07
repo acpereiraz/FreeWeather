@@ -1,3 +1,4 @@
+// Resource imports
 import icon_01d from "./assets/icons/modern/01d.png";
 import icon_01n from "./assets/icons/modern/01n.png";
 import icon_02d from "./assets/icons/modern/02d.png";

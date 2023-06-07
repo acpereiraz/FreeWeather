@@ -1,9 +1,11 @@
+// React imports
 import { TbTilde } from "react-icons/tb"
 import { HiArrowSmRight } from "react-icons/hi";
-import FormatDate from "../utils/FormatDate.js";
 import { IoIosThermometer, IoIosWater } from "react-icons/io";
 import { VscArrowSmallDown, VscArrowSmallUp } from "react-icons/vsc";
 import { WiCelsius, WiStrongWind, WiDaySunny, WiNightClear, WiDayCloudy, WiNightCloudy, WiCloudy, WiSprinkle, WiRain, WiDayRain, WiNightRain, WiDayLightning, WiNightLightning, WiDaySnow, WiNightSnow, WiDayFog, WiNightFog } from "react-icons/wi";
+// App local imports
+import FormatDate from "../utils/FormatDate.js";
 
 const WeatherTable = ({ data }) => {
 

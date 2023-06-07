@@ -1,5 +1,5 @@
+// Styling imports
 import "./styles/PanelLeft.css";
-
 
 const PanelLeft = ({ isPanelActive }) => {
 

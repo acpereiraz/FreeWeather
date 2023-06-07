@@ -6,4 +6,4 @@ const FormatDate = (dateString) => {
     return [`${day} ${month.replace(month[0], month[0].toUpperCase())}`, week];
   };
 
-  export default FormatDate;
+export default FormatDate;

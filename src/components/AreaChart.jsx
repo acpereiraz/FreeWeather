@@ -1,4 +1,6 @@
+// React imports
 import ReactApexChart from "react-apexcharts";
+// Styling imports
 import "./styles/AreaChart.css";
 
 const AreaChart = ({isDark, data}) => {

@@ -9,13 +9,16 @@
  * @returns {JSX.Element} The MainContent component.
  */
 
+// React imports
 import { useState } from "react";
-import Label from "./Label.jsx";
-import Icon from "./Icon.jsx";
+// App local imports
 import AreaChart from "./AreaChart.jsx";
 import FormatDate from "../utils/FormatDate.js";
 import {FormatHour as TimeNow} from "../utils/FormatHour.js";
+import Icon from "./Icon.jsx";
+import Label from "./Label.jsx";
 import WeatherTable from "./WeatherTable.jsx";
+// Styling imports
 import "./styles/MainContent.css";
 
 function MainContent({ city, fullData, isDark }) {

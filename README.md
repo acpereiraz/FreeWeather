@@ -1,3 +1,14 @@
+&nbsp;
+
+&nbsp;
+<div align="center">
+	<img src="./public/fw.svg" alt="Your image title" width="300"/>
+</div>
+&nbsp;
+
+&nbsp;
+
+&nbsp;
 # FreeWeather
 O FreeWeather foi criado para suprir a necessidade de ter na palma da mão todas as informações de clima e previsões de qualquer local, matendo o usuário atualizado a todo momento das previsões da sua cidade e do mundo. O mesmo pede a localização atual do usuário para se ajustar e mostrar as previsões de acordo o local disponibilizado pelo GPS do dispositivo.
 

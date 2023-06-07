@@ -1,5 +1,5 @@
 // React imports
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { isMobile } from "react-device-detect";
 import Cookies from "js-cookie";
 // App local imports
@@ -31,6 +31,8 @@ function App() {
   const scrollRef = useRef(null);
   const APIKEY = import.meta.env.VITE_API_KEY;
 
+/** Block of useEffect hooks */
+
   useEffect(() => {
     (navigator.geolocation) && (
       navigator.geolocation.getCurrentPosition(
@@ -57,15 +59,30 @@ function App() {
       }
     }
     fetchData(APIKEY);
-  }, [isLoading, currentCoord, APIKEY]);
+  }, [currentCoord, APIKEY]);
+
+  useEffect(() => {
+    isMobile && setIsPanelActive(false);
+  }, []);
+
+/** Block of handle functions */
 
   const handleScroll = () => {
     scrollRef.current && setScrollOffset(scrollRef.current.scrollTop)
   }
 
-  useEffect(() => {
-    isMobile && setIsPanelActive(false);
-  }, []);
+  const handleDarkModeChange = useCallback((isDark) => {
+    setIsDark(isDark);
+  }, [setIsDark]);
+
+  const handlePanelActiveChange = useCallback((isActive) => {
+    setIsPanelActive(isActive);
+  }, [setIsPanelActive]);
+  
+  const handleCurrentCoordChange = useCallback((coord) => {
+    setCurrentCoord(coord);
+  }, [setCurrentCoord]);
+
 
   return(
       <div className={`App ${isDark ? 'dark' : ''}`}>
@@ -80,10 +97,10 @@ function App() {
             <div id="container-mid" className="flex flex-col grow w-full">
               <NavTopBar
                 isPanelActive={isPanelActive}
-                setIsPanelActive={setIsPanelActive}
+                setIsPanelActive={handlePanelActiveChange}
                 isDark={isDark}
-                setIsDark={setIsDark}
-                setCurrentCoord={setCurrentCoord}
+                setIsDark={handleDarkModeChange}
+                setCurrentCoord={handleCurrentCoordChange}
                 scrollOffset={scrollOffset}
               />
               <MainContent city={city} fullData={data} isDark={isDark} />

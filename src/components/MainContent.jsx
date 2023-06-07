@@ -19,7 +19,19 @@ import Icon from "./Icon.jsx";
 import Label from "./Label.jsx";
 import WeatherTable from "./WeatherTable.jsx";
 // Styling imports
-import "./styles/MainContent.css";
+import "./styles/MainContent.css";  
+
+/**
+ * Capitalizes the first letter of each word in a string.
+ * @param {string} str - The input string.
+ * @returns {string} The capitalized string.
+ */
+function Capitalize(str) {
+  return str
+    .split(' ')
+    .map((word) => word.replace(/^\w/, (c) => c.toUpperCase()))
+    .join(' ');
+}
 
 function MainContent({ city, fullData, isDark }) {
   // State variables
@@ -36,17 +48,7 @@ function MainContent({ city, fullData, isDark }) {
     setShowCalendar(!showCalendar);
   };
 
-  /**
-   * Capitalizes the first letter of each word in a string.
-   * @param {string} str - The input string.
-   * @returns {string} The capitalized string.
-   */
-  function Capitalize(str) {
-    return str
-      .split(' ')
-      .map((word) => word.replace(/^\w/, (c) => c.toUpperCase()))
-      .join(' ');
-  }
+
 
   // Forecast object
   const forecast = {

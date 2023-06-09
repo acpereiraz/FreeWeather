@@ -30,8 +30,6 @@ const Favorites = ({setIsFavoritesModalOpen, setCurrentCoord}) => {
         }).filter(item => item !== null));
     },[load])
 
-    console.log(favorites)
-
     return(
         <div id="modal-favorites" className="absolute h-screen w-screen transition-all duration-300">
             <div onClick={handleFavoritesModalClose} className="absolute bg-gray-600 dark:bg-midnight dark:opacity-70 opacity-50 w-full h-full transition-all duration-300">

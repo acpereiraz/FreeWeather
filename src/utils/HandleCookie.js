@@ -6,7 +6,6 @@ const HandleCookie = (forecast, coord) =>{
         return false
     }
     Cookies.set(forecast.city, coord, { sameSite:'strict' })
-    console.log('this is returning true: '+Cookies.get(forecast.city))
     return true
 }
 

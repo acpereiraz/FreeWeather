@@ -8,7 +8,7 @@ import Wait from "./Wait.jsx";
 // Styling imports
 import "./styles/NavTopBar.css"
 
-const NavTopBar = ({ isPanelActive, setIsPanelActive, isDark, setIsDark, setCurrentCoord, scrollOffset }) => {
+const NavTopBar = ({ isPanelActive, setIsPanelActive, isDark, setIsDark, setCurrentCoord, scrollOffset, setIsFavoritesModalOpen }) => {
 
   const [cityArr, setCityArr] = useState([]);
   const [searchArg, setSearchArg] = useState("Sao Paulo")
@@ -23,6 +23,10 @@ const NavTopBar = ({ isPanelActive, setIsPanelActive, isDark, setIsDark, setCurr
   function handleDarkModeSwitch() {
     Cookies.set("dark-mode", !isDark, { sameSite:'strict' });
     setIsDark(!isDark);
+  }
+
+  function handleFavoritesModalOpen() {
+    setIsFavoritesModalOpen(true)
   }
 
   useEffect(()=>{
@@ -48,7 +52,30 @@ const NavTopBar = ({ isPanelActive, setIsPanelActive, isDark, setIsDark, setCurr
     setIsPanelActive(false);
   },[scrollOffset])
 
-  const icons = ['home', 'star', 'person', 'info'];
+  // const icons = ['home', 'star', 'person', 'info'];
+
+  const menuItems = [
+    {
+      name: "Home",
+      icon: "home",
+      function: null
+    },
+    {
+      name: "Favorites",
+      icon: "star",
+      function: handleFavoritesModalOpen
+    },
+    {
+      name: "Profile",
+      icon: "person",
+      function: null
+    },
+    {
+      name: "About Us",
+      icon: "info",
+      function: null
+    }
+  ]
 
   return (
     <div id="nav-top" className={`${scrollOffset&&"smm:absolute smm:shadow smm:bg-opacity-60 smm:dark:bg-opacity-60 smm:backdrop-blur-2xl smm:dark:backdrop-blur-3xl"} 
@@ -67,11 +94,11 @@ const NavTopBar = ({ isPanelActive, setIsPanelActive, isDark, setIsDark, setCurr
               <span id="logo-icon" className={`material-symbols-rounded text-[40px] subpixel-antialiased `}>cloud</span>
               <div className={`${isPanelActive ? '' : 'hidden'} bg-white z-99 drop-shadow-md dark:bg-minblack transition-all 
                               duration-300 absolute min-h-fit rounded-3xl flex flex-col text-purple-500`}>
-                {icons.map((icon, index)=>(
-                  <button key={index} className="p-2 rounded-full h-fit hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-maxblack 
+                {menuItems.map((item, index)=>(
+                  <button key={index} onClick={item.function} className="p-2 rounded-full h-fit hover:bg-gray-100 active:bg-gray-200 dark:hover:bg-maxblack 
                                                   dark:active:bg-midnight md:hidden flex items-center text-center transition-all duration-300">
                     <span className={`material-symbols-outlined text-md font-light`}>
-                      {icon}
+                      {item.icon}
                     </span>
                   </button>
                 ))}

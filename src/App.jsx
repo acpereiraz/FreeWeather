@@ -4,6 +4,7 @@ import { isMobile } from "react-device-detect";
 import Cookies from "js-cookie";
 // App local imports
 import ApiCaller from "./utils/ApiCaller.js";
+import Favorites from "./components/Favorites.jsx"
 import GetDays from "./utils/GetDays.js";
 import MainContent from "./components/MainContent.jsx";
 import NavTopBar from "./components/NavTopBar.jsx";
@@ -28,6 +29,7 @@ function App() {
   const [currentCoord, setCurrentCoord] = useState(["-23.54", "-46.63"]) //São Paulo as default latitude and longitude
   const [scrollOffset, setScrollOffset] = useState(0);
   const [isPanelActive, setIsPanelActive] = useState(true);
+  const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
   const scrollRef = useRef(null);
   const APIKEY = import.meta.env.VITE_API_KEY;
 
@@ -83,14 +85,19 @@ function App() {
     setCurrentCoord(coord);
   }, [setCurrentCoord]);
 
+  const handleFavoritesModalChange = useCallback((isOpen)=>{
+    setIsFavoritesModalOpen(isOpen);
+  }, [setIsFavoritesModalOpen]);
+
 
   return(
       <div className={`App ${isDark ? 'dark' : ''}`}>
+        {isFavoritesModalOpen&& <Favorites setIsFavoritesModalOpen={handleFavoritesModalChange} setCurrentCoord={handleCurrentCoordChange} />}
         <Wait isLoading={isLoading} isDark={isDark} text="Loading...">
           <div ref={scrollRef} onScroll={handleScroll} className="bg-[#f3f4f6] dark:bg-[#1f2022] flex flex-row overflow-x-clip overflow-y-auto lg:overflow-y-clip subpixel-antialiased h-[100vh] w-[100vw] min-h-[100vh] max-h-[100vh] transition-all duration-300">
             {/* Right menu panel */}
             <div id="container-start">
-              <PanelLeft isPanelActive={isPanelActive} />
+              <PanelLeft isPanelActive={isPanelActive} setIsFavoritesModalOpen={handleFavoritesModalChange} />
             </div>
 
             {/* Main content */}
@@ -102,8 +109,9 @@ function App() {
                 setIsDark={handleDarkModeChange}
                 setCurrentCoord={handleCurrentCoordChange}
                 scrollOffset={scrollOffset}
+                setIsFavoritesModalOpen={handleFavoritesModalChange}
               />
-              <MainContent city={city} fullData={data} isDark={isDark} />
+              <MainContent city={city} fullData={data} isDark={isDark} currentCoord={currentCoord} />
             </div>
           </div>
         </Wait>

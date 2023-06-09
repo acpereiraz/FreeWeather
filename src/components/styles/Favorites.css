@@ -1,0 +1,7 @@
+#modal-favorites{
+    z-index: 1000;
+}
+
+#modal-container{
+    z-index: 1001;
+}

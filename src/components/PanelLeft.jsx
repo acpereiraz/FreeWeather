@@ -1,24 +1,32 @@
 // Styling imports
 import "./styles/PanelLeft.css";
 
-const PanelLeft = ({ isPanelActive }) => {
+const PanelLeft = ({ isPanelActive, setIsFavoritesModalOpen }) => {
+
+  function handleFavoritesModalOpen() {
+    setIsFavoritesModalOpen(true)
+  }
 
   const menuItems = [
     {
-      name: 'Home',
-      icon: 'home'
+      name: "Home",
+      icon: "home",
+      function: null
     },
     {
-      name: 'Favorites',
-      icon: 'star'
+      name: "Favorites",
+      icon: "star",
+      function: handleFavoritesModalOpen
     },
     {
-      name: 'Profile',
-      icon: 'person'
+      name: "Profile",
+      icon: "person",
+      function: null
     },
     {
-      name: 'About Us',
-      icon: 'info'
+      name: "About Us",
+      icon: "info",
+      function: null
     }
   ]
 
@@ -34,7 +42,7 @@ const PanelLeft = ({ isPanelActive }) => {
       <div id="container-nav" className="align-center w-full">
         <ul className="flex flex-col text-[14px] text-left text-gray-600 dark:text-gray-300 w-full subpixel-antialiased">
           {menuItems.map((item, index)=>(
-            <li key={index} className="hover:text-purple-500 hover:bg-gray-100 dark:hover:bg-maxblack w-full py-4 transition-all hover:transition-all cursor-pointer active:text-purple-300">
+            <li key={index} onClick={item.function} className="hover:text-purple-500 hover:bg-gray-100 dark:hover:bg-maxblack w-full py-4 transition-all hover:transition-all cursor-pointer active:text-purple-300">
               <a id="text-cont" className={`flex items-center text-center text-md gap-2`}>
                 <span className={`material-symbols-outlined text-md font-light`}>
                   {item.icon}

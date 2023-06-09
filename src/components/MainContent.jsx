@@ -10,9 +10,10 @@
  */
 
 // React imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // App local imports
 import AreaChart from "./AreaChart.jsx";
+import HandleCookie from "../utils/HandleCookie.js"
 import FormatDate from "../utils/FormatDate.js";
 import {FormatHour as TimeNow} from "../utils/FormatHour.js";
 import Icon from "./Icon.jsx";
@@ -20,6 +21,7 @@ import Label from "./Label.jsx";
 import WeatherTable from "./WeatherTable.jsx";
 // Styling imports
 import "./styles/MainContent.css";  
+import CheckCookie from "../utils/CheckCookie.js";
 
 /**
  * Capitalizes the first letter of each word in a string.
@@ -33,10 +35,11 @@ function Capitalize(str) {
     .join(' ');
 }
 
-function MainContent({ city, fullData, isDark }) {
+function MainContent({ city, fullData, isDark, currentCoord }) {
   // State variables
   const [showCalendar, setShowCalendar] = useState(false);
   const [dayIndex, setDayIndex] = useState(0);
+  const [isFavorited, setIsFavorited] = useState(CheckCookie(city.name));
 
   // Set data as fullData item from current day based on dayIndex
   const data = fullData[dayIndex];
@@ -47,8 +50,6 @@ function MainContent({ city, fullData, isDark }) {
   const handleClick = () => {
     setShowCalendar(!showCalendar);
   };
-
-
 
   // Forecast object
   const forecast = {
@@ -64,6 +65,15 @@ function MainContent({ city, fullData, isDark }) {
     timeNow: dayIndex === 0 ? TimeNow() : data[0].dt_txt.split(' ')[1].replace(':00', ''),
   };
 
+  //Favorite a city saving it to cookie
+  function handleFavoriteSwitch(){
+    setIsFavorited(HandleCookie(forecast, currentCoord));
+  }
+
+  useEffect(()=>{
+    setIsFavorited(CheckCookie(city.name))
+  },[forecast])
+
   // Array of days
   const arrDays = ['Today', 'Tomorrow', forecast.date[1]];
 
@@ -78,16 +88,18 @@ function MainContent({ city, fullData, isDark }) {
           {/* Weather details container */}
           <div
             id="container-label"
-            className="flex flex-row flex-wrap content-center justify-between w-full px-2 text-gray-700 sm:px-4"
+            className="flex flex-row flex-wrap content-center justify-between w-full px-1 text-gray-700 sm:px-4"
           >
             <div className="flex flex-col text-start w-fit grow">
               <h2 className={`font-bold text-gray-600 dark:text-gray-300`}>
                 {dayIndex < 2 ? arrDays[dayIndex] : arrDays[2]}
               </h2>
-              <h1 className="font-light text-[28px] sm:text-[40px] max-w-[150px] sm:max-w-[250px] lg:max-w-full lg:w-full text-gray-600 dark:text-gray-200 truncate overflow-hidden text-ellipsis">
-                {forecast.city}
-                {forecast.state && `, ${forecast.state}`}
-              </h1>
+              <div className="flex gap-2 font-light text-[30px] sm:text-[40px] max-w-[170px] sm:max-w-[250px] lg:max-w-full lg:w-full text-gray-600 items-center dark:text-gray-200">
+                <h1 className="truncate overflow-hidden text-ellipsis">
+                  {forecast.city}
+                </h1>
+                <span onClick={handleFavoriteSwitch} className={`material-symbols-rounded transition-all duration-300 ${isFavorited?"text-yellow-400":"text-gray-300 dark:text-lt2black"} cursor-pointer text-[26px] sm:text-[38px]`}>star</span>
+              </div>
               <p className="text-gray-400">{forecast.date[0]}</p>
             </div>
             <div className="flex flex-col items-end">
@@ -95,11 +107,11 @@ function MainContent({ city, fullData, isDark }) {
               <div className="flex text-end justify-end items-center gap-4 max-h-[42px] sm:max-h-[60px]">
                 <div
                   id="icon"
-                  className="-translate-y-[0.5em] h-[65px] w-[65px] sm:h-[70x] sm:w-[70px] lg:h-[70px] lg:w-[70px] lg:mr-2 sm:scale-[100%]"
+                  className="-translate-y-[0.5em] h-[55px] w-[55px] sm:h-[70x] sm:w-[70px] lg:h-[70px] lg:w-[70px] lg:mr-2 sm:scale-[100%]"
                 >
                   <Icon icon={`${forecast.icon}`} />
                 </div>
-                <h1 className="text-[35px] dark:text-gray-200 sm:text-[40px] lg:text-[48px] text-gray-600 dark:text-gray-200 transition-all duration-500 font-medium">
+                <h1 className="text-[30px] dark:text-gray-200 sm:text-[40px] lg:text-[48px] text-gray-600 dark:text-gray-200 transition-all duration-500 font-medium">
                   {forecast.feels_like}°
                 </h1>
               </div>

@@ -1,3 +1,15 @@
+/**
+ * This is the Wait component used to show a loading indicator while waiting for the content on children to get ready for render.
+ * @component
+ *
+ * @param {Object} children - Content that should be waited for to be rendered later.
+ * @param {boolean} isLoading - Determine if content is still on loading state or not.
+ * @param {string} text - Text displayed on loading indicator.
+ *
+ * @returns {JSX.Element} The Wait component.
+ */
+
+// React imports
 import React from "react";
 
 function Wait ({children, isLoading, text}) {

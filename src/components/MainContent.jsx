@@ -1,10 +1,10 @@
 /**
- * This is the main component where it renders all the weather information.
+ * This is the main component where it renders all the weather information together.
  * @component
  *
- * @param {Object} city - The city object containing name.
- * @param {Array} fullData - The array of weather data for multiple days.
- * @param {boolean} isDark - Flag indicating if the dark theme is enabled.
+ * @param {Object} city - The city object containing name of the current city.
+ * @param {Array} fullData - The array of weather data containing information of multiple days.
+ * @param {boolean} isDark - Flag indicator for dark theme mode switch.
  *
  * @returns {JSX.Element} The MainContent component.
  */

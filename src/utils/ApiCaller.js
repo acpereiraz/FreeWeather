@@ -5,7 +5,7 @@ async function ApiCaller(url) {
     const response = await axios.get(url);
     return response.data;
   } catch (error) {
-    console.log("API Call Error! " + error);
+    console.error("API Call Error! " + error);
   }
 }
 

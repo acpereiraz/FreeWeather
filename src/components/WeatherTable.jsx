@@ -1,3 +1,12 @@
+/**
+ * This is the WeatherTable component which render a complete table showing weather forecasts for the next days.
+ * @component
+ *
+ * @param {Array} data - The array of weather data containing information of multiple days.
+ *
+ * @returns {JSX.Element} The WeatherTable, a table component.
+ */
+
 // React imports
 import { TbTilde } from "react-icons/tb"
 import { HiArrowSmRight } from "react-icons/hi";

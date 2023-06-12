@@ -13,6 +13,10 @@ import Wait from "./components/Wait.jsx";
 
 function App() {
 
+  /**
+   * @returns {boolean} Check if the cookie for dark-mode exists, value returned will later be set as default value for isDark state below.
+   * It is used to retrieve the last mode setted by user
+   */
   const getCookie = () => {
     try{
       return(JSON.parse(Cookies.get("dark-mode")));
@@ -21,6 +25,9 @@ function App() {
     }
   }
 
+  /**
+   * TODO: Reduce the usage of states: Check if some states are really useful if not just remove it.
+   */
   const Cookie = getCookie(); //Get dark-mode boolean string from cookies and convert it to boolean type
   const [isDark, setIsDark] = useState(Cookie); //Pass Cookie value as default state for isDark, remembering the last setted mode
   const [data, setData] = useState();
@@ -35,6 +42,10 @@ function App() {
 
 /** Block of useEffect hooks */
 
+  /**
+   * Executed at the beginning to ask user for geolocation permission, if accepted it will get the latitude and longitude and store on currentCoord,
+   * rendering again the interface and retrieving new data from the api.
+   */
   useEffect(() => {
     (navigator.geolocation) && (
       navigator.geolocation.getCurrentPosition(
@@ -48,6 +59,10 @@ function App() {
     )
   }, [])
 
+  /**
+   * Api data fetcher, it is executed everytime a currentCoord is updated, so if a new coordinate is set through search or geolocation,
+   * it will rerender and fetch data from the current coordinate.
+   */
   useEffect(() => {
     async function fetchData(APIKEY) {
       try{
@@ -63,16 +78,26 @@ function App() {
     fetchData(APIKEY);
   }, [currentCoord, APIKEY]);
 
+  /**
+   * Close left panel if detects that user is browsing from a mobile device.
+   */
   useEffect(() => {
     isMobile && setIsPanelActive(false);
   }, []);
 
+
 /** Block of handle functions */
 
+  /**
+  * handleScroll: It is a handle function to detect scrolling action, if true it sets the scroll offset on state variable scrollOffset.
+  */
   const handleScroll = () => {
     scrollRef.current && setScrollOffset(scrollRef.current.scrollTop)
   }
 
+  /**
+   * Callback functions: Improve performance by avoiding a new function instantiation at every render.
+   */
   const handleDarkModeChange = useCallback((isDark) => {
     setIsDark(isDark);
   }, [setIsDark]);
@@ -92,7 +117,9 @@ function App() {
 
   return(
       <div className={`App ${isDark ? 'dark' : ''}`}>
+        {/* Favorite modal */}
         {isFavoritesModalOpen&& <Favorites setIsFavoritesModalOpen={handleFavoritesModalChange} setCurrentCoord={handleCurrentCoordChange} />}
+        {/* Wait block */}
         <Wait isLoading={isLoading} isDark={isDark} text="Loading...">
           <div ref={scrollRef} onScroll={handleScroll} className="bg-[#f3f4f6] dark:bg-[#1f2022] flex flex-row overflow-x-clip overflow-y-auto lg:overflow-y-clip subpixel-antialiased h-[100vh] w-[100vw] min-h-[100vh] max-h-[100vh] transition-all duration-300">
             {/* Right menu panel */}
